@@ -30,6 +30,7 @@ If you only remember one thing: **edit files in repo layers, not in `$HOME` syml
 | Terminal prompt | `common/.p10k.zsh`, `common/.config/starship.toml` | OS-specific terminal config |
 | Neovim config | `common/.config/nvim/init.lua` | `common/.config/nvim/lua/**` (if present) |
 | WezTerm | `common/.wezterm.lua`, `common/.config/wezterm/wezterm.lua` | `macos/.config/wezterm/macos.lua` or `linux/.config/wezterm/linux.lua` |
+| Kitty | `common/.config/kitty/kitty.conf` | `macos/.config/kitty/macos.conf` or `linux/.config/kitty/linux.conf` |
 | tmux config | `common/.tmux.conf` | `macos/.config/tmux/macos.conf` or `linux/.config/tmux/linux.conf` |
 | Keyboard remap (Karabiner/Kanata) | `common/.config/kanata/kanata.kbd` | `macos/.config/kanata/` (daemon scripts), `linux/.config/systemd/user/kanata.service` |
 | Yabai/Skhd/Sketchybar | `macos/.config/yabai/yabairc`, `macos/.config/skhd/skhdrc`, `macos/.config/sketchybar/sketchybarrc` | `macos/Library/LaunchAgents/*.plist` |
@@ -51,6 +52,7 @@ If you only remember one thing: **edit files in repo layers, not in `$HOME` syml
 - `common/.gitconfig`, `common/.gitignore_global`
 - `common/.tmux.conf`
 - `common/.wezterm.lua`
+- `common/.config/kitty/kitty.conf`
 - `common/.config/nvim/init.lua`
 - `common/.config/gh/config.yml`
 - `common/.config/lazygit/config.yml`
@@ -64,6 +66,7 @@ If you only remember one thing: **edit files in repo layers, not in `$HOME` syml
 - `macos/.macos`
 - `macos/.aerospace.toml`
 - `macos/.config/yabai/yabairc`
+- `macos/.config/kitty/macos.conf`
 - `macos/.config/skhd/skhdrc`
 - `macos/.config/sketchybar/sketchybarrc`
 - `macos/.config/karabiner/karabiner.json`
@@ -73,6 +76,7 @@ If you only remember one thing: **edit files in repo layers, not in `$HOME` syml
 ### `linux/` (Linux-only)
 - `linux/.zsh/linux.zsh`
 - `linux/.config/tmux/linux.conf`
+- `linux/.config/kitty/linux.conf`
 - `linux/.config/wezterm/linux.lua`
 - `linux/.config/systemd/user/kanata.service`
 

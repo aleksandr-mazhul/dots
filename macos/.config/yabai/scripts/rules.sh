@@ -20,6 +20,7 @@ declare -A APP_WORKSPACE=(
   ["ChatGPT"]="X"
   ["WezTerm"]="Z"
   ["wezterm-gui"]="Z"
+  ["kitty"]="Z"
   ["Finder"]="E"
   ["Telegram"]="T"
   ["Discord"]="I"

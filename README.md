@@ -20,7 +20,8 @@
 
 ### Editor / Terminal
 - **Neovim** — Lua + Lazy.nvim + LSP stack
-- **WezTerm** — terminal config
+- **Kitty** — shared terminal (macOS + Linux)
+- **WezTerm** — previous terminal config (kept as fallback)
 - **Ghostty** — optional terminal config
 
 ### macOS WM stack
@@ -49,6 +50,7 @@ dotfiles/
 │   │   ├── lazygit/
 │   │   ├── nvim/
 │   │   ├── starship.toml
+│   │   ├── kitty/
 │   │   ├── wezterm/
 │   │   ├── yazi/
 │   │   └── ghostty/              # optional
@@ -77,6 +79,7 @@ dotfiles/
 │   │   ├── sketchybar/
 │   │   ├── skhd/
 │   │   ├── tmux/
+│   │   ├── kitty/
 │   │   ├── wezterm/
 │   │   └── yabai/
 │   │
@@ -106,6 +109,7 @@ dotfiles/
 │   ├── .config/
 │   │   ├── systemd/user/kanata.service
 │   │   ├── tmux/
+│   │   ├── kitty/
 │   │   └── wezterm/
 │   └── .zsh/
 │

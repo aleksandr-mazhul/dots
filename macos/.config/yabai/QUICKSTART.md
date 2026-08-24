@@ -72,7 +72,7 @@ tail -f /tmp/yabai.$(whoami).log
 | V | 11 | Browser |
 | W | 12 | WebStorm |
 | X | 13 | ChatGPT |
-| Z | 14 | WezTerm |
+| Z | 14 | Kitty |
 | N | 15 | Notes |
 | Y | 16 | Zoom |
 

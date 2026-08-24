@@ -252,8 +252,12 @@ run = "move-node-to-workspace C"
 if.app-id = "com.apple.mail"
 run = "move-node-to-workspace M"
 
-[[on-window-detected]] 
+[[on-window-detected]]
 if.app-id = "com.github.wez.wezterm"
+run = "move-node-to-workspace Z"
+
+[[on-window-detected]]
+if.app-id = "net.kovidgoyal.kitty"
 run = "move-node-to-workspace Z"
 
 [[on-window-detected]]
