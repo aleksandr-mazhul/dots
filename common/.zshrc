@@ -22,3 +22,7 @@ done
 
 [[ -r "$HOME/.zsh/host.zsh" ]] && source "$HOME/.zsh/host.zsh"
 [[ -r "$HOME/.zsh.private" ]] && source "$HOME/.zsh.private"
+
+# OpenJDK (Homebrew)
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
