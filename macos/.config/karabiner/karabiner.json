@@ -3016,7 +3016,7 @@
                     "value": 1
                   }
                 ],
-                "description": "Open -a 'Terminal.app'",
+                "description": "Open -a 'kitty'",
                 "from": {
                   "key_code": "t",
                   "modifiers": {
@@ -3027,7 +3027,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -a 'Terminal.app'"
+                    "shell_command": "open -a 'kitty'"
                   }
                 ],
                 "type": "basic"

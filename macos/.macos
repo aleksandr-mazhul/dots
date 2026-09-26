@@ -4,6 +4,13 @@ set -euo pipefail
 # macOS defaults can be added here.
 # Keep this script idempotent.
 
+KITTY_ID="net.kovidgoyal.kitty"
+if command -v duti >/dev/null 2>&1 && [[ -d /Applications/kitty.app ]]; then
+  duti -s "$KITTY_ID" ssh
+  duti -s "$KITTY_ID" telnet
+  duti -s "$KITTY_ID" x-man-page
+fi
+
 SCREENSHOT_DIR="${HOME}/screenshots"
 mkdir -p "$SCREENSHOT_DIR"
 defaults write com.apple.screencapture location -string "$SCREENSHOT_DIR"

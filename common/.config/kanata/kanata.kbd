@@ -156,7 +156,7 @@
   rght rght
 
   scln C-a
-  i    C-b
+  i    C-a  ;; tmux prefix; Kitty maps ctrl+a → send_text \x01
   u    S-M-lbrc
   o    S-M-rbrc
   p    pgdn
@@ -253,7 +253,7 @@
     ho-s (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open -a "Slack.app")
     ho-e (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open -a "Superhuman.app")
     ho-n (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open -a "Notion.app")
-    ho-t (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open -a "Terminal.app")
+    ho-t (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open -a "kitty")
     ho-h (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026")
     ho-z (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open -a "zoom.us.app")
     ho-m (cmd /usr/bin/sudo -u alexandermazhul /usr/bin/open -a "Reflect.app")
