@@ -83,7 +83,6 @@ launch_apps() {
   open_app "Telegram" "ru.keepcoder.Telegram" &
   start_kitty &
   open_app "Arc" "company.thebrowser.Browser" &
-  open_app "Yandex" "ru.yandex.desktop.yandex-browser" &
   open_app "Cursor" "com.todesktop.230313mzl4w4u92" &
   wait || true
   log "independent apps launched"
@@ -125,7 +124,6 @@ wanted = {
     "wezterm-gui": "Z",
     "kitty": "Z",
     "Arc": "V",
-    "Yandex": "D",
     "Cursor": "C",
     "ChatGPT": "X",
 }
