@@ -2,6 +2,10 @@
 
 GNU Stow configurations for a Mac that is also usable on Linux. The files in git are the real configs. `$HOME` only gets symlinks.
 
+<img src="docs/screenshots/desktop.jpg" alt="SketchyBar on the desktop" width="820">
+
+<img src="docs/screenshots/kitty.jpg" alt="Kitty, tmux, and fastfetch" width="820">
+
 ```bash
 git clone git@github.com:Aleksandr-Mazhul/dots.git ~/dotfiles
 cd ~/dotfiles
@@ -30,7 +34,7 @@ Secrets are not in the clone. Copy `private/` yourself.
 | Multiplexer | tmux, with a launchd timer that saves the session |
 | Window manager | yabai, skhd, SketchyBar, borders |
 | Keyboard | Kanata, with Karabiner's VirtualHID driver |
-| Tools | git, GitHub CLI, lazygit, yazi |
+| Tools | git, GitHub CLI, lazygit, yazi, fastfetch |
 
 AeroSpace is installed by the Brewfile and configured, and it does not start at login. yabai is the window manager.
 
