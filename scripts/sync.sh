@@ -2,13 +2,14 @@
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/dotfiles}"
-HOST_PACKAGE="${HOST_PACKAGE:-$(hostname -s)}"
 cd "$DOTFILES"
+# shellcheck source=lib/host-package.sh
+source "$DOTFILES/scripts/lib/host-package.sh"
 
-echo "📡 Pulling latest changes..."
+echo "Pulling latest changes..."
 git pull --rebase --autostash
 
-echo "🔄 Re-stowing packages..."
+echo "Re-stowing packages..."
 stow -R common
 
 case "$(uname -s)" in
@@ -20,10 +21,6 @@ case "$(uname -s)" in
     ;;
 esac
 
-if [ -d "$DOTFILES/hosts/$HOST_PACKAGE" ]; then
-  stow -R -d hosts -t "$HOME" "$HOST_PACKAGE"
-else
-  echo "ℹ️  Host package hosts/$HOST_PACKAGE not found. Skipping host overrides."
-fi
+stow_host_package restow
 
-echo "✅ Sync complete!"
+echo "Sync complete."

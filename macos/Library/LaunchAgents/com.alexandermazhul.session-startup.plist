@@ -7,7 +7,8 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/alexandermazhul/.local/bin/session-startup</string>
+    <string>-c</string>
+    <string>exec "$HOME/.local/bin/session-startup"</string>
   </array>
   <key>RunAtLoad</key>
   <true/>
@@ -19,16 +20,9 @@
   <string>Aqua</string>
   <key>AbandonProcessGroup</key>
   <true/>
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>HOME</key>
-    <string>/Users/alexandermazhul</string>
-    <key>USER</key>
-    <string>alexandermazhul</string>
-  </dict>
   <key>StandardOutPath</key>
-  <string>/Users/alexandermazhul/Library/Logs/session-startup.log</string>
+  <string>/tmp/session-startup.launchd.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/alexandermazhul/Library/Logs/session-startup.log</string>
+  <string>/tmp/session-startup.launchd.log</string>
 </dict>
 </plist>

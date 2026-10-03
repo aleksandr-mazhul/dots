@@ -6,8 +6,11 @@
   <string>com.alexandermazhul.screenshot-clipboard</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/alexandermazhul/.local/bin/screenshot-to-clipboard</string>
+    <string>/bin/zsh</string>
+    <string>-c</string>
+    <string>exec "$HOME/.local/bin/screenshot-to-clipboard"</string>
   </array>
+  <!-- launchd does not expand $HOME. This path is the home directory on this Mac. -->
   <key>WatchPaths</key>
   <array>
     <string>/Users/alexandermazhul/screenshots</string>

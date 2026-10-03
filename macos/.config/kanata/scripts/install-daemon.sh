@@ -4,10 +4,20 @@
 set -euo pipefail
 
 DOTFILES_KANATA="${HOME}/dotfiles/macos/.config/kanata"
-KANATA_BIN_SRC="${HOME}/.cargo/bin/kanata"
-if [[ ! -x "$KANATA_BIN_SRC" ]]; then
+if [[ -x "${HOME}/.cargo/bin/kanata" ]]; then
+  KANATA_BIN_SRC="${HOME}/.cargo/bin/kanata"
+elif [[ -x /opt/homebrew/bin/kanata ]]; then
+  KANATA_BIN_SRC="/opt/homebrew/bin/kanata"
+elif [[ -x /usr/local/bin/kanata ]]; then
   KANATA_BIN_SRC="/usr/local/bin/kanata"
+else
+  echo "kanata binary not found. Install it with brew or cargo, then rerun." >&2
+  exit 1
 fi
+
+RENDERED_KANATA_PLIST="$(mktemp)"
+sed "s|__HOME__|${HOME}|g" "${DOTFILES_KANATA}/plist/dev.kanata.kanata.plist" > "$RENDERED_KANATA_PLIST"
+trap 'rm -f "$RENDERED_KANATA_PLIST"' EXIT
 
 "${DOTFILES_KANATA}/scripts/build-media-key.sh"
 
@@ -49,7 +59,7 @@ launchctl enable system/dev.kanata.disable-karabiner
 launchctl kickstart -k system/dev.kanata.disable-karabiner
 
 # Kanata daemon
-cp '${DOTFILES_KANATA}/plist/dev.kanata.kanata.plist' /Library/LaunchDaemons/dev.kanata.kanata.plist
+cp '${RENDERED_KANATA_PLIST}' /Library/LaunchDaemons/dev.kanata.kanata.plist
 chown root:wheel /Library/LaunchDaemons/dev.kanata.kanata.plist
 chmod 644 /Library/LaunchDaemons/dev.kanata.kanata.plist
 launchctl bootout system/dev.kanata.kanata 2>/dev/null || true

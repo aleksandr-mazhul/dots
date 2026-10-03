@@ -27,10 +27,13 @@ Never duplicate the same config in multiple layers without clear override intent
 ## Symlink / Stow workflow
 - Edit files in the repository, not in `$HOME` symlinks.
 - Use Stow as the only link manager; do not create manual `ln -s` links.
-- Typical apply flow:
+- Fresh machine: `./scripts/bootstrap-macos.sh` or `./scripts/bootstrap-linux.sh` from a clone at `~/dotfiles`.
+- Existing machine: `./scripts/sync.sh`.
+- Stow is still the only link manager. On macOS, if `hosts/$(hostname -s)` does not exist, bootstrap and sync apply `hosts/macbook`.
+- Manual equivalent:
   - `stow common`
   - `stow macos` (or `stow linux`)
-  - `stow -d hosts -t ~ <hostname>`
+  - `stow -d hosts -t ~ macbook`
 - Before applying widely, run dry-run checks:
   - `stow -n -v common`
   - `stow -n -v macos` or `stow -n -v linux`

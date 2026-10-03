@@ -3,8 +3,10 @@
 # Intended to run once from launchd at Aqua login (not KeepAlive).
 set -euo pipefail
 
-export HOME="/Users/alexandermazhul"
-export USER="alexandermazhul"
+if [ -z "${HOME:-}" ] || [ -z "${USER:-}" ]; then
+  echo "session-startup: HOME and USER must be set" >&2
+  exit 1
+fi
 
 OPEN="/usr/bin/open"
 WINDSCRIBE_CLI="/Applications/Windscribe.app/Contents/MacOS/windscribe-cli"

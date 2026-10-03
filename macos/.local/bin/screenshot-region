@@ -4,8 +4,10 @@
 # also fails (no Screen Recording for file output). Clipboard then dump works.
 set -euo pipefail
 
-export HOME="/Users/alexandermazhul"
-export USER="alexandermazhul"
+if [ -z "${HOME:-}" ] || [ -z "${USER:-}" ]; then
+  echo "screenshot-region: HOME and USER must be set" >&2
+  exit 1
+fi
 DIR="${HOME}/screenshots"
 LOG="${HOME}/Library/Logs/screenshot-region.log"
 mkdir -p "$DIR" "$(dirname "$LOG")"

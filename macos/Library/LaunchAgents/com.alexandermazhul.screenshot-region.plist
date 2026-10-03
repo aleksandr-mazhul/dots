@@ -7,7 +7,8 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/alexandermazhul/.local/bin/screenshot-region</string>
+    <string>-c</string>
+    <string>exec "$HOME/.local/bin/screenshot-region"</string>
   </array>
   <key>RunAtLoad</key>
   <false/>
@@ -15,16 +16,9 @@
   <string>Interactive</string>
   <key>LimitLoadToSessionType</key>
   <string>Aqua</string>
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>HOME</key>
-    <string>/Users/alexandermazhul</string>
-    <key>USER</key>
-    <string>alexandermazhul</string>
-  </dict>
   <key>StandardOutPath</key>
-  <string>/Users/alexandermazhul/Library/Logs/screenshot-region.log</string>
+  <string>/tmp/screenshot-region.launchd.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/alexandermazhul/Library/Logs/screenshot-region.log</string>
+  <string>/tmp/screenshot-region.launchd.log</string>
 </dict>
 </plist>

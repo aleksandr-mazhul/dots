@@ -3,10 +3,17 @@
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # --- FZF ---
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+elif [ -n "${HOMEBREW_PREFIX:-}" ] && [ -f "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" ]; then
+  source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
+  [ -f "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh" ] && source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh"
+fi
 bindkey -r '^[c'
 bindkey '^I' expand-or-complete
-bindkey '^G' fzf-cd-widget
+if (( ${+widgets[fzf-cd-widget]} )); then
+  bindkey '^G' fzf-cd-widget
+fi
 
 # --- Zoxide ---
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"

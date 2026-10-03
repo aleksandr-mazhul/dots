@@ -2,15 +2,25 @@
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/dotfiles}"
-HOST_PACKAGE="${HOST_PACKAGE:-$(hostname -s)}"
 cd "$DOTFILES"
+# shellcheck source=lib/host-package.sh
+source "$DOTFILES/scripts/lib/host-package.sh"
 
+echo "Installing GNU Stow..."
 "$DOTFILES/scripts/install-stow.sh"
 
+echo "Linking dotfiles with GNU Stow..."
 stow common
 stow linux
-if [ -d "$DOTFILES/hosts/$HOST_PACKAGE" ]; then
-  stow -d hosts -t "$HOME" "$HOST_PACKAGE"
-else
-  echo "ℹ️  Host package hosts/$HOST_PACKAGE not found. Skipping host overrides."
-fi
+stow_host_package stow
+
+cat <<'EOF'
+
+Bootstrap linked common/ and linux/ into $HOME.
+It does not install distro packages. You still want zsh, neovim, tmux,
+kitty, and kanata from the distro, then:
+
+  systemctl --user enable --now kanata.service
+
+Reload the shell: exec $SHELL
+EOF

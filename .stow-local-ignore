@@ -1,0 +1,3 @@
+# Dated keyboard snapshots must never be linked into ~/.config.
+keyboard-backup-
+\.DS_Store

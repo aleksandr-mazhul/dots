@@ -14,8 +14,9 @@
   <string>com.alexandermazhul.tmux-save</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/alexandermazhul/.config/tmux/tmux-save.sh</string>
-    <string>worker-now</string>
+    <string>/bin/zsh</string>
+    <string>-c</string>
+    <string>exec "$HOME/.config/tmux/tmux-save.sh" worker-now</string>
   </array>
   <key>EnvironmentVariables</key>
   <dict>

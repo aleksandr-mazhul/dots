@@ -146,7 +146,7 @@ Rule: **Prefer targeted grep/jq slices over full-file reads on large configs.**
   - `stow common`
   - `stow macos` or `stow linux`
   - `stow -d hosts -t ~ <hostname>`
-- Host package auto-detection is handled in bootstrap/sync via `HOST_PACKAGE`.
+- Host package selection lives in `scripts/lib/host-package.sh`. It uses `HOST_PACKAGE` or `hostname -s`, and on macOS falls back to `hosts/macbook` (this machine's hostname is `MBP-M1-Pro`).
 - Never replace this with ad-hoc manual `ln -s` unless user explicitly asks.
 
 ---

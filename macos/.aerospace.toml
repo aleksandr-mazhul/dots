@@ -9,8 +9,8 @@ config-version = 2
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = []
 
-# Start AeroSpace at login
-start-at-login = true
+# yabai is the window manager. Leave this off so login does not start a second one.
+start-at-login = false
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
