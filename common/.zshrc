@@ -1,3 +1,8 @@
+# Auto-attach tmux in kitty, before p10k instant prompt (exec'ing tmux after
+# instant prompt has started would print p10k console-output warnings and
+# waste startup work).
+[[ -r "$HOME/.zsh/tmux-auto.zsh" ]] && source "$HOME/.zsh/tmux-auto.zsh"
+
 # Powerlevel10k instant prompt.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -22,3 +27,8 @@ done
 
 [[ -r "$HOME/.zsh/host.zsh" ]] && source "$HOME/.zsh/host.zsh"
 [[ -r "$HOME/.zsh.private" ]] && source "$HOME/.zsh.private"
+
+if [ -d /opt/homebrew/opt/openjdk/bin ]; then
+  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+  export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+fi

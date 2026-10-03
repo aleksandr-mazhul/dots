@@ -9,8 +9,8 @@ config-version = 2
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = []
 
-# Start AeroSpace at login
-start-at-login = true
+# yabai is the window manager. Leave this off so login does not start a second one.
+start-at-login = false
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -252,8 +252,12 @@ run = "move-node-to-workspace C"
 if.app-id = "com.apple.mail"
 run = "move-node-to-workspace M"
 
-[[on-window-detected]] 
+[[on-window-detected]]
 if.app-id = "com.github.wez.wezterm"
+run = "move-node-to-workspace Z"
+
+[[on-window-detected]]
+if.app-id = "net.kovidgoyal.kitty"
 run = "move-node-to-workspace Z"
 
 [[on-window-detected]]

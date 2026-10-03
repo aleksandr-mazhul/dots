@@ -7,3 +7,11 @@ macos/.config/kanata/bin/
 *.backup
 automatic_backups/
 yabai.bak.*
+
+# gh auth login writes oauth_token here. The public config is config.yml.
+common/.config/gh/hosts.yml
+common/.config/github-copilot/oauth.json
+common/.config/github-copilot/apps.json
+
+# Local keyboard snapshots. Also listed in .stow-local-ignore.
+macos/.config/keyboard-backup-*/

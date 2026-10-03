@@ -7,14 +7,10 @@
 
   <key>ProgramArguments</key>
   <array>
-    <string>/opt/homebrew/bin/yabai</string>
+    <string>/bin/zsh</string>
+    <string>-c</string>
+    <string>export PATH="$HOME/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"; exec /opt/homebrew/bin/yabai</string>
   </array>
-
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>PATH</key>
-    <string>/Users/alexandermazhul/bin:/Users/alexandermazhul/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/opt/fzf/bin</string>
-  </dict>
 
   <key>RunAtLoad</key>
   <true/>
@@ -34,9 +30,9 @@
   <integer>-20</integer>
 
   <key>StandardOutPath</key>
-  <string>/tmp/yabai_alexandermazhul.out.log</string>
+  <string>/tmp/yabai.out.log</string>
 
   <key>StandardErrorPath</key>
-  <string>/tmp/yabai_alexandermazhul.err.log</string>
+  <string>/tmp/yabai.err.log</string>
 </dict>
 </plist>

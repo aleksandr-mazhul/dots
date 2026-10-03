@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  macOS stand-in for the Linux tmux-save.service. That unit saves on logout /
+  shutdown because continuum's periodic save only runs while a client is
+  attached (it rides status-right). launchd has no reliable "before shutdown"
+  hook for agents, so save on an interval instead: every 60 s, attached or not.
+  worker-now runs the save in this process, through the same lock as the hooks;
+  with no server running it exits 0 without touching the snapshot dir.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.alexandermazhul.tmux-save</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>-c</string>
+    <string>exec "$HOME/.config/tmux/tmux-save.sh" worker-now</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <!-- without a UTF-8 locale tmux turns tabs in -F output into `_` and
+         resurrect writes an unparseable snapshot -->
+    <key>LANG</key>
+    <string>en_US.UTF-8</string>
+  </dict>
+  <key>StartInterval</key>
+  <integer>60</integer>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>LowPriorityIO</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>/dev/null</string>
+  <key>StandardErrorPath</key>
+  <string>/dev/null</string>
+</dict>
+</plist>

@@ -7,14 +7,10 @@
 
   <key>ProgramArguments</key>
   <array>
-    <string>/opt/homebrew/bin/skhd</string>
+    <string>/bin/zsh</string>
+    <string>-c</string>
+    <string>export PATH="$HOME/bin:$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"; exec /opt/homebrew/bin/skhd</string>
   </array>
-
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>PATH</key>
-    <string>/Users/alexandermazhul/bin:/Users/alexandermazhul/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/opt/fzf/bin</string>
-  </dict>
 
   <key>RunAtLoad</key>
   <true/>
@@ -34,9 +30,9 @@
   <integer>-20</integer>
 
   <key>StandardOutPath</key>
-  <string>/tmp/skhd_alexandermazhul.out.log</string>
+  <string>/tmp/skhd.out.log</string>
 
   <key>StandardErrorPath</key>
-  <string>/tmp/skhd_alexandermazhul.err.log</string>
+  <string>/tmp/skhd.err.log</string>
 </dict>
 </plist>

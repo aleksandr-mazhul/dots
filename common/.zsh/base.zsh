@@ -13,4 +13,3 @@ bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 bindkey -r '^[c'
 bindkey '^I' expand-or-complete
-bindkey '^G' fzf-cd-widget

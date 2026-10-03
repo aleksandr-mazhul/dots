@@ -6,8 +6,9 @@
   <string>com.alexandermazhul.media-key</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/alexandermazhul/dotfiles/macos/.config/kanata/bin/macos-media-key</string>
-    <string>daemon</string>
+    <string>/bin/zsh</string>
+    <string>-c</string>
+    <string>exec "$HOME/dotfiles/macos/.config/kanata/bin/macos-media-key" daemon</string>
   </array>
   <key>RunAtLoad</key>
   <true/>
@@ -18,8 +19,8 @@
   <key>LimitLoadToSessionType</key>
   <string>Aqua</string>
   <key>StandardOutPath</key>
-  <string>/Users/alexandermazhul/Library/Logs/media-key.log</string>
+  <string>/tmp/media-key.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/alexandermazhul/Library/Logs/media-key.log</string>
+  <string>/tmp/media-key.log</string>
 </dict>
 </plist>

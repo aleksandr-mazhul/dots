@@ -1,368 +1,94 @@
-# 🔧 Dotfiles
+# Dotfiles
 
-Чистый, модульный и полностью управляемый через **GNU Stow** репозиторий конфигурации окружения для **macOS** (с заделом под Linux).
+GNU Stow configurations for a Mac that is also usable on Linux. The files in git are the real configs. `$HOME` only gets symlinks.
 
-Подход: **single source of truth** — все реальные конфиги лежат в git, а в `$HOME` создаются symlink через Stow.
+```bash
+git clone git@github.com:Aleksandr-Mazhul/dots.git ~/dotfiles
+cd ~/dotfiles
+./scripts/bootstrap-macos.sh
+```
 
----
+On Linux, `./scripts/bootstrap-linux.sh` links the shared and Linux packages. It does not install distro packages.
 
-## ✨ Что внутри
+Homebrew has to exist before the macOS script (https://brew.sh). Xcode Command Line Tools have to exist before Homebrew. The script installs Stow, installs [the Brewfile](common/Brewfile), then links `common`, `macos`, and the host package.
 
-### Core CLI
-- **Zsh** — модульная shell-конфигурация
-- **Starship** — prompt
-- **Git** — global config + ignores
-- **tmux** — terminal multiplexer
-- **Yazi** — TUI file manager
-- **Lazygit** — Git UI
-- **GitHub CLI** — `gh`
-- **Homebrew** — package management
+Three things on a new Mac are still manual, because the system will not grant them to a script:
 
-### Editor / Terminal
-- **Neovim** — Lua + Lazy.nvim + LSP stack
-- **WezTerm** — terminal config
-- **Ghostty** — optional terminal config
+1. Accessibility for yabai, skhd, and SketchyBar.
+2. `sudo yabai --load-sa`
+3. `macos/.config/kanata/scripts/install-daemon.sh` for the keyboard daemon.
 
-### macOS WM stack
-- **yabai** — tiling window manager
-- **skhd** — hotkey daemon
-- **Sketchybar** — status bar
-- **Borders** — focused window borders
-- **Karabiner / Kanata** — keyboard remapping
+Secrets are not in the clone. Copy `private/` yourself.
 
-### Optional
-- **Hammerspoon** — utility automation
-- **AeroSpace config** — legacy / experimental
+## What you get
 
----
+| | |
+|---|---|
+| Shell | zsh, Powerlevel10k, fzf, zoxide |
+| Editor | Neovim (LazyVim) |
+| Terminal | Kitty day to day. WezTerm and Ghostty configs stay in the repo. |
+| Multiplexer | tmux, with a launchd timer that saves the session |
+| Window manager | yabai, skhd, SketchyBar, borders |
+| Keyboard | Kanata, with Karabiner's VirtualHID driver |
+| Tools | git, GitHub CLI, lazygit, yazi |
 
-# 📦 Repository structure
+AeroSpace is installed by the Brewfile and configured, and it does not start at login. yabai is the window manager.
+
+## Layout
+
+Stow packages map onto `$HOME`. A later package fills in files the earlier one does not have. Nothing here is copied.
 
 ```text
-dotfiles/
-├── common/                        # Cross-platform configs
-│   ├── .config/
-│   │   ├── gh/
-│   │   ├── github-copilot/
-│   │   ├── kanata/
-│   │   │   └── kanata.kbd         # shared HRM + layers (macOS/Linux)
-│   │   ├── lazygit/
-│   │   ├── nvim/
-│   │   ├── starship.toml
-│   │   ├── wezterm/
-│   │   ├── yazi/
-│   │   └── ghostty/              # optional
-│   │
-│   ├── .zsh/
-│   │   ├── aliases.zsh
-│   │   ├── base.zsh
-│   │   ├── completion.zsh
-│   │   ├── exports.zsh
-│   │   ├── functions.zsh
-│   │   └── plugins.zsh
-│   │
-│   ├── .editorconfig
-│   ├── .gitconfig
-│   ├── .gitignore_global
-│   ├── .tmux.conf
-│   ├── .wezterm.lua
-│   ├── .zshrc
-│   └── Brewfile
-│
-├── macos/                         # macOS-only layer
-│   ├── .config/
-│   │   ├── borders/
-│   │   ├── kanata/
-│   │   ├── karabiner/
-│   │   ├── sketchybar/
-│   │   ├── skhd/
-│   │   ├── tmux/
-│   │   ├── wezterm/
-│   │   └── yabai/
-│   │
-│   ├── .hammerspoon/             # optional
-│   │   └── init.lua
-│   │
-│   ├── .zsh/
-│   │   └── macos.zsh
-│   │
-│   ├── Library/
-│   │   └── LaunchAgents/
-│   │       ├── com.asmvik.yabai.plist
-│   │       └── com.koekeishiya.skhd.plist
-│   │
-│   ├── .aerospace.toml           # legacy / experimental
-│   ├── .macos
-│   └── .zprofile
-│
-├── hosts/                         # Machine-specific overrides
-│   └── macbook/
-│       ├── .config/
-│       ├── .gitconfig.local
-│       └── .zsh/
-│           └── host.zsh
-│
-├── linux/                         # Linux layer
-│   ├── .config/
-│   │   ├── systemd/user/kanata.service
-│   │   ├── tmux/
-│   │   └── wezterm/
-│   └── .zsh/
-│
-├── private/                       # ignored by git
-│   ├── .config/
-│   └── .zsh.private
-│
-├── scripts/
-│   ├── bootstrap-macos.sh
-│   ├── bootstrap-linux.sh
-│   ├── install-stow.sh
-│   └── sync.sh
-│
-├── .gitignore
-├── LICENSE
-└── README.md
+common/     shell, git, nvim, kitty, tmux, kanata layout, Brewfile
+macos/      yabai, skhd, SketchyBar, borders, Karabiner, LaunchAgents
+linux/      Linux shell, kitty, tmux, kanata user service
+hosts/      this MacBook: hosts/macbook
+private/    gitignored secrets
+scripts/    bootstrap, sync, update
 ```
 
----
+`hosts/macbook` is the host package. This machine's short hostname is `MBP-M1-Pro`, so bootstrap and sync apply `hosts/macbook` when `hosts/$(hostname -s)` is missing. Override with `HOST_PACKAGE`.
 
-# 🔗 GNU Stow architecture
-
-Репозиторий управляется через **GNU Stow**.
-
-Это значит:
-
-- в git лежат **реальные файлы**
-- в `$HOME` лежат **symlink**
-- никаких копий конфигов
-- никаких ручных `ln -s`
-
-Пример:
+Edit files in the repo. The path in `$HOME` is a symlink to that file.
 
 ```text
-~/.zshrc
-  → ~/dotfiles/common/.zshrc
-
-~/.config/yabai
-  → ~/dotfiles/macos/.config/yabai
-
-~/Library/LaunchAgents/com.asmvik.yabai.plist
-  → ~/dotfiles/macos/Library/LaunchAgents/com.asmvik.yabai.plist
+~/.zshrc          →  ~/dotfiles/common/.zshrc
+~/.config/nvim    →  ~/dotfiles/common/.config/nvim
+~/.config/yabai   →  ~/dotfiles/macos/.config/yabai
 ```
 
----
-
-# 🚀 Quick start
-
-## Clone repo
-
-```bash
-cd ~
-git clone <your-repo-url> dotfiles
-cd dotfiles
-```
-
-## Install GNU Stow
-
-macOS:
-
-```bash
-brew install stow
-```
-
-Linux:
-
-```bash
-sudo apt install stow
-```
-
----
-
-## Apply config
+## Day to day
 
 ```bash
 cd ~/dotfiles
-
-stow common
-stow macos
-stow -d hosts -t ~ <hostname>
+./scripts/sync.sh
 ```
 
-После этого конфиги подключены.
+That pulls with rebase and re-stows. On macOS, `./scripts/update-macos.sh` also upgrades Homebrew.
 
----
-
-# 🖥 Window manager stack
-
-Основной WM stack:
-
-```text
-yabai
-+ skhd
-+ sketchybar
-+ borders
-```
-
----
-
-## Start services
-
-### yabai
-
-```bash
-launchctl bootstrap gui/$(id -u) \
-  ~/Library/LaunchAgents/com.asmvik.yabai.plist
-```
-
-reload:
-
-```bash
-launchctl kickstart -k gui/$(id -u)/com.asmvik.yabai
-```
-
----
-
-### skhd
-
-```bash
-launchctl bootstrap gui/$(id -u) \
-  ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
-```
-
-reload:
-
-```bash
-launchctl kickstart -k gui/$(id -u)/com.koekeishiya.skhd
-```
-
----
-
-### Sketchybar
-
-```bash
-brew services start sketchybar
-```
-
-reload:
-
-```bash
-brew services restart sketchybar
-```
-
----
-
-## Permissions
-
-macOS → Privacy & Security:
-
-Enable:
-
-- Accessibility
-- Automation
-- Screen Recording (if needed)
-
-for:
-
-- yabai
-- skhd
-- Sketchybar
-- Hammerspoon (optional)
-
----
-
-# ➕ Add new config
-
-Example:
-
-```bash
-mkdir -p common/.config/foo
-cp -R ~/.config/foo/* common/.config/foo/
-```
-
-Apply:
-
-```bash
-stow -R common
-```
-
-Done.
-
----
-
-# 🔄 Update workflow
-
-Edit:
-
-```bash
-vim ~/.config/yabai/yabairc
-```
-
-Commit:
-
-```bash
-cd ~/dotfiles
-git add -A
-git commit -m "update yabai config"
-git push
-```
-
-Sync on another machine:
-
-```bash
-cd ~/dotfiles
-git pull --rebase
-
-stow -R common
-stow -R macos
-stow -R -d hosts -t ~ <hostname>
-```
-
----
-
-# 🔐 Private files
-
-Never commit:
-
-- tokens
-- secrets
-- ssh keys
-- credentials
-
-Use:
-
-```text
-private/
-```
-
-Examples:
-
-```text
-private/.zsh.private
-private/.config/gh/
-private/.config/github-copilot/
-```
-
----
-
-# 🧪 Dry run check
-
-Проверка, что структура чистая:
+Dry-run before a risky link:
 
 ```bash
 stow -n -v common
 stow -n -v macos
-stow -n -v -d hosts -t ~ <hostname>
+stow -n -v -d hosts -t ~ macbook
 ```
 
-Если нет conflict/error → всё корректно.
+## Secrets
 
----
+`private/` is gitignored. Keep tokens there, not next to the public GitHub CLI config.
 
-# 📝 Notes
+Ignored on purpose:
 
-- **yabai + skhd** — основной WM
-- **Hammerspoon** — optional helper
-- **AeroSpace config** — legacy / experimental
-- **GNU Stow** — единственный source of truth
+- `private/.zsh.private`
+- `private/.config/gh/hosts.yml`
+- `private/.config/github-copilot/`
+- `common/.config/gh/hosts.yml` if `gh auth login` writes it into the stowed directory
 
----
+Do not `git add -A`.
+
+## This machine
+
+LaunchAgents expand `$HOME` through a shell, so another account can load them. One exception: `launchd` does not expand paths it watches, so screenshot filing still points at `/Users/alexandermazhul/screenshots` in `macos/Library/LaunchAgents/com.alexandermazhul.screenshot-clipboard.plist`.
+
+The Kanata layout in `common/.config/kanata/kanata.kbd` still calls the media-key helper by the absolute path on this Mac. Re-running `install-daemon.sh` rewrites the system daemon plist for the current home. It does not rewrite that layout file.

@@ -65,7 +65,7 @@ fi
 yabai -m signal --add event=window_created app="^Telegram$" label=place_telegram action='
 ( sleep 0.4; yabai -m window "$YABAI_WINDOW_ID" --space T ) >/dev/null 2>&1 &
 ' 2>/dev/null || true
-yabai -m signal --add event=window_created app="^(WezTerm|wezterm-gui)$" label=place_wezterm action='
+yabai -m signal --add event=window_created app="^(WezTerm|wezterm-gui|kitty)$" label=place_terminal action='
 ( sleep 0.4; yabai -m window "$YABAI_WINDOW_ID" --space Z ) >/dev/null 2>&1 &
 ' 2>/dev/null || true
 
