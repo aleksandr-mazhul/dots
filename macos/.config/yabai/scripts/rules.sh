@@ -160,6 +160,8 @@ declare -a JETBRAINS_FLOAT_PATTERNS=(
 
   '^Search Everywhere$'
   '^Go to .*'
+
+  '^Data Sources and Drivers$'
 )
 
 # =============================================================================
